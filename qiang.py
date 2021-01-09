@@ -45,8 +45,8 @@ def login():
 def jw_post(cookie, kcId):
     url = "http://jw1.yzu.edu.cn/xkAction.do"
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
-               'Cookie': 'JSESSIONID=%s' % cookie,
-               'Content-Type': 'application/x-www-form-urlencoded'}  # 这里是Cookie，形式为JSESSIONID=xxxx
+               'Cookie': 'JSESSIONID=%s' % cookie,  # 这里是Cookie，形式为JSESSIONID=xxxx
+               'Content-Type': 'application/x-www-form-urlencoded'}
     body = {'kcId': kcId,  # 这里是课程号，形式为课程号_课序号.如17258011_01
             'preActionType': '3',
             'actionType': '9'}
@@ -79,9 +79,9 @@ def jw_post(cookie, kcId):
     elif("没有课余量" in r.text):
         print("发包成功，没有课余量")
         return 1
-    elif('<font color="#990000">' not in r.text):
+    elif('<font color="#990000">' not in r.text and '校任选课开课信息!' in r.text):
         # 课序号错误没有任何提示，只能先这样凑合了，待优化
-        print("课序号错误，请检查后重新输入！")
+        print("课程号错误，请检查后重新输入！")
         os.system("pause")
         exit(0)
     else:
@@ -101,7 +101,7 @@ def main():
         if(cookie == -1):
             cookie = input("Cookie获取失败，请手动输入Cookie:")
     kcId_1 = input("请输入课程号(例如17018004)：")
-    kcId_2 = input("请输入课程号(例如01,0不可少)：")
+    kcId_2 = input("请输入课序号(例如01,0不可少)：")
     kcId = kcId_1 + '_' + kcId_2
     while jw_post(cookie, kcId):
         time.sleep(2)
