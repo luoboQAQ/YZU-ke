@@ -138,13 +138,14 @@ def Post(host, cookie, kcId):
 
 
 def verison():
+    print("=" * 70)
     print("正在联网获取更新信息...")
-    __Version = "V20210114"
+    __Version = "V20210707"
     __INFO = "YZU-ke项目地址为 https://github.com/luoboQAQ/YZU-ke"
 
     try:
         update_log = requests.get(
-            "https://cdn.jsdelivr.net/gh/luoboQAQ/YZU-ke@master/requirements.txt", timeout=10).content.decode(
+            "https://cdn.jsdelivr.net/gh/luoboQAQ/YZU-ke@master/Updatelog.txt", timeout=10).content.decode(
             "utf8")
         update_log = update_log.split("\n")
         print(__INFO)
@@ -157,11 +158,12 @@ def verison():
                 print(i)
     except:
         print("版本网络信息错误")
+    print("=" * 70)
 
 
 def main():
-    print("欢迎使用选课助手，本程序还处于demo阶段，可能存在BUG，欢迎提issue")
-    print("Designed by luoboQuQ")
+    print("欢迎使用选课助手，本程序基于GPL-3.0协议开源，仅供学习使用！")
+    print("Designed by luoboQAQ")
     verison()
     a = int(input("请选择要使用的服务器(1/2/3):"))
     if a == 0:
