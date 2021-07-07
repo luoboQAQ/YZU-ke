@@ -137,9 +137,32 @@ def Post(host, cookie, kcId):
         return 1
 
 
+def verison():
+    print("正在联网获取更新信息...")
+    __Version = "V20210114"
+    __INFO = "YZU-ke项目地址为 https://github.com/luoboQAQ/YZU-ke"
+
+    try:
+        update_log = requests.get(
+            "https://cdn.jsdelivr.net/gh/luoboQAQ/YZU-ke@master/requirements.txt", timeout=10).content.decode(
+            "utf8")
+        update_log = update_log.split("\n")
+        print(__INFO)
+        print("程序版本为：{}".format(__Version))
+        print("最新版本为：{}".format(update_log[0]))
+        if __Version != update_log[0]:
+            print("当前不是最新版本，建议更新")
+            print("更新提要：")
+            for i in update_log[1:]:
+                print(i)
+    except:
+        print("版本网络信息错误")
+
+
 def main():
     print("欢迎使用选课助手，本程序还处于demo阶段，可能存在BUG，欢迎提issue")
     print("Designed by luoboQuQ")
+    verison()
     a = int(input("请选择要使用的服务器(1/2/3):"))
     if a == 0:
         # 手动模式
