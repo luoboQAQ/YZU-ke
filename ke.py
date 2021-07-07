@@ -142,14 +142,14 @@ def verison():
     print("正在联网获取更新信息...")
     __Version = "V20210707"
     __INFO = "YZU-ke项目地址为 https://github.com/luoboQAQ/YZU-ke"
+    print(__INFO)
+    print("程序版本为：{}".format(__Version))
 
     try:
         update_log = requests.get(
-            "https://cdn.jsdelivr.net/gh/luoboQAQ/YZU-ke@master/Updatelog.txt", timeout=10).content.decode(
+            "https://raw.fastgit.org/luoboQAQ/YZU-ke/master/Updatelog.txt", timeout=10).content.decode(
             "utf8")
         update_log = update_log.split("\n")
-        print(__INFO)
-        print("程序版本为：{}".format(__Version))
         print("最新版本为：{}".format(update_log[0]))
         if __Version != update_log[0]:
             print("当前不是最新版本，建议更新")
